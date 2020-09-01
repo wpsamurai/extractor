@@ -19,34 +19,34 @@ module Extractor
           Oj.saj_parse(handler, f)
         end
 
-        handler.products
+        handler.items
       end
 
       class Handler < ::Oj::Saj
-        PRODUCT_ATTR = %i[title full_url price].freeze
+        ITEM_ATTR = %i[title full_url price].freeze
 
-        attr_reader :products
+        attr_reader :items
 
         def initialize
-          @products = []
+          @items = []
         end
 
         def hash_start(_key)
-          @product = {}
-          @product_node = true
+          @item = {}
+          @item_node = true
         end
 
         def add_value(value, key)
-          return unless @product_node
+          return unless @item_node
           return if key.nil?
-          return unless PRODUCT_ATTR.include?(key.to_sym)
+          return unless ITEM_ATTR.include?(key.to_sym)
 
-          @product[key.to_sym] = value
+          @item[key.to_sym] = value
         end
 
         def hash_end(_key)
-          @product_node = false
-          @products << @product
+          @item_node = false
+          @items << @item
         end
       end
     end

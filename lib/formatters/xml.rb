@@ -18,8 +18,8 @@ module Extractor
 
         def result
           @hash
-            .sort_by { |product| product[:'g:price'].split.first.to_f }
-            .map { |product| [product[:title], product[:'g:price'], product['link']] }
+            .sort_by { |item| item[:'g:price'].split.first.to_f }
+            .map { |item| [item[:title], item[:'g:price'], item[:link]] }
         end
     end
   end
