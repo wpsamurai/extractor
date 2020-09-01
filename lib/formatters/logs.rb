@@ -12,14 +12,14 @@ module Extractor
 
         output << 'Top 5 hosts'
         output << ::Terminal::Table.new(
-            headings: %w[Hostname Hits],
-            rows: result[:hosts].to_a
+          headings: %w[Hostname Hits],
+          rows: result[:hosts].to_a
         )
 
         output << 'Top 5 files'
         output << ::Terminal::Table.new(
-            headings: %w[File Hits],
-            rows: result[:files].to_a
+          headings: %w[File Hits],
+          rows: result[:files].to_a
         )
 
         output
@@ -27,9 +27,9 @@ module Extractor
 
       private
 
-        def result
-          @hash
-        end
+      def result
+        @hash
+      end
     end
   end
 end

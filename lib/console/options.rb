@@ -5,19 +5,19 @@ module Extractor
   module Console
     class Options
       DEFAULT_OPTIONS = {
-          parser: :logs
+        parser: :logs
       }
 
       def self.parse(args)
         options = DEFAULT_OPTIONS
 
         parser = OptionParser.new do |opts|
-          opts.banner = "Usage: extractor.rb [options] file"
+          opts.banner = 'Usage: extractor.rb [options] file'
 
           opts.on(
-              '-pPARSER',
-              '--parser=PARSER',
-              "Select parser (default: #{DEFAULT_OPTIONS[:parser]})"
+            '-pPARSER',
+            '--parser=PARSER',
+            "Select parser (default: #{DEFAULT_OPTIONS[:parser]})"
           ) do |p|
             options[:parser] = p
           end

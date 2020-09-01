@@ -16,11 +16,11 @@ module Extractor
         files = {}
 
         URI.open(@file) do |f|
-          f.each_line  do | raw_line |
+          f.each_line do |raw_line|
             line = clean_line(raw_line)
             next if line.empty?
 
-            elements =  line.split
+            elements = line.split
             url = elements[6]
             uri = URI(url)
 
@@ -36,16 +36,16 @@ module Extractor
         end
 
         {
-            hosts: hosts.sort_by{ |_k, v| -v }.take(5),
-            files: files.sort_by{ |_k, v| -v }.take(5)
+          hosts: hosts.sort_by { |_k, v| -v }.take(5),
+          files: files.sort_by { |_k, v| -v }.take(5)
         }
       end
 
       private
 
-        def clean_line(line)
-          line.strip.chomp
-        end
+      def clean_line(line)
+        line.strip.chomp
+      end
     end
   end
 end
