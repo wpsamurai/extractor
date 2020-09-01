@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'optparse'
 
 module Extractor
@@ -17,7 +18,7 @@ module Extractor
           opts.on(
             '-pPARSER',
             '--parser=PARSER',
-            "Select parser (default: #{DEFAULT_OPTIONS[:parser]})"
+            "Select parser (default: #{DEFAULT_OPTIONS[:parser]}). Available values: logs, json, xml"
           ) do |p|
             options[:parser] = p
           end

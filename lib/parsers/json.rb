@@ -23,7 +23,7 @@ module Extractor
       end
 
       class Handler < ::Oj::Saj
-        PRODUCT_ATTR = %w[title full_url price].freeze
+        PRODUCT_ATTR = %i[title full_url price].freeze
 
         attr_reader :products
 
@@ -38,9 +38,10 @@ module Extractor
 
         def add_value(value, key)
           return unless @product_node
-          return unless PRODUCT_ATTR.include?(key)
+          return if key.nil?
+          return unless PRODUCT_ATTR.include?(key.to_sym)
 
-          @product[key] = value
+          @product[key.to_sym] = value
         end
 
         def hash_end(_key)

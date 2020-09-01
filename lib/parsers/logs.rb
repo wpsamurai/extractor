@@ -43,9 +43,9 @@ module Extractor
 
       private
 
-      def clean_line(line)
-        line.strip.chomp
-      end
+        def clean_line(line)
+          line.strip.chomp
+        end
     end
   end
 end

@@ -1,5 +1,5 @@
 require 'open-uri'
-require "ox"
+require 'ox'
 
 module Extractor
   module Parsers

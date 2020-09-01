@@ -27,9 +27,9 @@ module Extractor
 
       private
 
-      def result
-        @hash
-      end
+        def result
+          @hash
+        end
     end
   end
 end
