@@ -19,16 +19,17 @@ module Extractor
           Ox.sax_parse(handler, f)
         end
 
-        handler.products
+        handler.items
       end
 
       class Handler < ::Ox::Sax
-        PRODUCT_ATTR = %i[title link g:price].freeze
+        ITEM_ATTR = %i[title link g:price].freeze
 
-        attr_reader :products
+        attr_reader :items
 
         def initialize
-          @products = []
+          @items = []
+          @item_node = false
         end
 
         def start_element(name)
@@ -36,23 +37,23 @@ module Extractor
 
           return unless name == :item
 
-          @product = {}
-          @product_node = true
+          @item = {}
+          @item_node = true
         end
 
         def text(value)
-          return unless @product_node
-          return unless PRODUCT_ATTR.include?(@current_node)
+          return unless @item_node
+          return unless ITEM_ATTR.include?(@current_node)
 
-          @product[@current_node] = value
+          @item[@current_node] = value
         end
 
         def end_element(name)
           return unless name == :item
 
-          @product_node = false
+          @item_node = false
 
-          @products << @product
+          @items << @item
         end
       end
     end
