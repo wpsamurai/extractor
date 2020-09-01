@@ -1,7 +1,7 @@
 # Extractor
 
 ## About
-Simple ruby script to parse files. Depends on the pareser selected returns different data from the source file.
+Simple Ruby script to parse files. Depends on the pareser selected returns different data from the source file.
 
 ## Installation
 
