@@ -30,7 +30,7 @@ You can select between following parsers:
 ## Examples
 Process local Varnish file
 ```
-$ ./extractor.rb ./data/varnish.log
+$ ./extractor.rb data/varnish.log
 Top 5 hosts
 +-------------------+------+
 | Hostname          | Hits |
@@ -55,7 +55,7 @@ Top 5 files
 
 Process XML file from the web
 ```
-$ ./extractor.rb -p xml ./extractor.rb -p xml https://feeds.example.com/8946.xml
+$ ./extractor.rb -p xml https://feeds.example.com/8946.xml
 +-----------------------------------------------------------------------------+------------+-----+
 | Title                                                                       | Price      | Url |
 +-----------------------------------------------------------------------------+------------+-----+
