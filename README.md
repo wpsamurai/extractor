@@ -30,7 +30,7 @@ You can select between following parsers:
 ## Examples
 Process local Varnish file
 ```
-$ ./extractor.rb data/varnish.log
+$ ./extractor.rb spec/fixtures/varnish.log
 Top 5 hosts
 +-------------------+------+
 | Hostname          | Hits |
