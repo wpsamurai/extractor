@@ -2,6 +2,14 @@ RSpec.describe Extractor::Parsers::Logs do
   describe '#parse' do
     subject (:parser) { described_class.new(filename) }
 
+    context 'when log file does not exist' do
+      let(:filename) { 'not_existing_path' }
+
+      it 'raises an exception' do
+        expect{ parser.parse }.to raise_error Errno::ENOENT
+      end
+    end
+
     context 'when log file is empty' do
       let(:filename) { "#{RSPEC_ROOT}/fixtures/empty.log" }
 
@@ -22,7 +30,7 @@ RSpec.describe Extractor::Parsers::Logs do
       end
     end
 
-    context 'when log file contains data' do
+    context 'when log file contains correct data' do
       let(:filename) { "#{RSPEC_ROOT}/fixtures/varnish.log" }
 
       it 'returns 5 hosts' do
@@ -63,6 +71,36 @@ RSpec.describe Extractor::Parsers::Logs do
         result = parser.parse
 
         expect(result[:files]).to eq expected_result
+      end
+    end
+
+    context 'with HTTP request' do
+      context 'when log file does not exist' do
+        let(:filename) { 'http://example.com/not_existing_file.log' }
+
+        before(:each) do
+          stub_request(:get, filename)
+            .to_return(status: 404)
+        end
+
+        it 'raises an exception' do
+          expect{ parser.parse }.to raise_error OpenURI::HTTPError
+        end
+      end
+
+      context 'when log file is available' do
+        let(:filename) { 'http://example.com/existing.log' }
+
+        before(:each) do
+          stub_request(:get, filename)
+            .to_return(body: File.new("#{RSPEC_ROOT}/fixtures/empty.log"), status: 200)
+        end
+
+        it 'fetches the file' do
+          expected_result = { hosts: [], files: [] }
+
+          expect(parser.parse).to eq expected_result
+        end
       end
     end
   end
